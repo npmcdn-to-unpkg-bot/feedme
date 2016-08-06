@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>FeedMe: Value food from the Best Restaurants in Sydney</title>
+
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link href="css/feedme.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Custom Scripts -->
+    <script src="https://npmcdn.com/lowdb/dist/lowdb.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top" style="box-shadow: none;margin-top: -4px;">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="col-md-2 col-sm-2 navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html" style="padding-right: 10px;">
+                    <!--<img src="img/logo.png" style="width:50px;">-->
+                    <div style="width: 50px; height: 50px; background-image: url('img/logo.png') !important; background-size: 100% 100%;"></div>
+                </a>
+                <p class="nav-title"><a href="index.html" style="text-decoration: none;float:left;font-size: 1.5vmax;padding-top: 5px;">FeedMe</a></p>
+            </div>
+            <div class="col-md-8 col-sm-8" style="margin-left:0px;">
+                <form onsubmit="searchFunction()" action="post-feed.html">
+                <input placeholder="Search for food/restaurants" id="search" type="text" name="search" style=" width: 95%;height: 25px;font-weight:100; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                </form>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="col-md-2 col-sm-2 collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-left: -40px;">
+                <ul class="nav navbar-nav navbar-right">
+                <!-- Login Form-->
+                    <form name="loginForm">
+                        <li class="animated fadeIn" id="nav-username" style="line-height: 21.5px; padding-top: 0px; display:none;">
+                            <input ng-model="userName" placeholder="Username" id="username" type="text" name="username" style="width: 80px;height: 20px;padding-top: 20px;margin-right: 20px;font-weight:100; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;padding-left:0px;">
+                        </li>
+                        <li class="animated fadeIn" id="nav-password" style="line-height: 21.5px; padding-top: 0px; display:none;">
+                            <input placeholder="Password" id="password" type="password" name="password" style="width: 80px;height: 20px;padding-top: 20px;font-weight:100;font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                            <button onclick="login()" id="submit" class="btn btn-flat waves-effect waves-light" style="padding:0px;height:25px;width:27px; color: #fff;">
+                                    <i class="small material-icons left" style="font-size: 20px; padding-left: 5px;margin-top: -15px;">send</i>
+                            </button>
+                        </li>
+                    </form>
+                    <li id="nav-login">
+                        <a style="padding-left:30px;padding-right:0px;">Login</a>
+                    </li>
+                    <li id="nav-register">
+                        <a style="padding-left: 15px;padding-right:10px;" href="register.html">Register</a>
+                    </li>
+                    <li class="animated fadeIn" id="nav-cart">
+                        <i class="small material-icons left" style="font-size: 20px; padding-left: 3px;margin-right: 0px; margin-top: 3px;">shopping_cart</i>
+                    </li>
+                    <li class="animated fadeIn" id="nav-userlogged" style="display:none;">
+                        <!-- <a style="padding-right: 15px;" onclick='toggleProfile()'>G'day</a> -->
+                        <a style="padding-right: 15px;">G'day</a>
+                    </li>
+                    <li class="animated fadeIn" id="nav-logout" style="display:none;">
+                        <button onclick="logout()" id="submit" class="btn btn-flat waves-effect waves-light" style="padding:0px;height:25px;width:27px; margin-top: -10px;color: #fff;">
+                                    <i class="small material-icons left" style="font-size: 20px; padding-left: 3px;padding-right: 1px;margin-top: -15px;">power_settings_new</i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <header class="intro-header" style="background-image: url('img/home-cooking.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading" style="padding-top: 0px; padding-bottom: 40px;">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container-fluid col-lg-2 col-md-2 col-sm-2 profile-box" style="background-color: #f5f5f5; height: 200px; position: fixed; z-index: 1;right: 1%;display:none;">
+                <div style="margin-left: auto; margin-right: auto; margin-top: 10px; margin-bottom: 5px; background-image: url(img/user-blank.png); background-size: 100% 100%;height: 50px; width: 50px; border-radius: 50%;">
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 login-box-name" style="text-align: center;">
+                    First Last
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: center; font-size: 12px;">
+                    Score
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: center; font-size: 30px;">
+                    0
+                </div>
+                <div id="owner-list">
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="font-size: 11px; text-transform: uppercase;letter-spacing: 1px;">
+                        <a href="list-product.html" style="color: black; text-decoration:none;">List an item</a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="font-size: 11px; text-transform: uppercase;letter-spacing: 1px;">
+                        <a href="profile.html" style="color: black; text-decoration:none;">View current orders</a>
+                    </div>
+                </div>
+                <div id="not-owner-list">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: center; font-size: 11px; text-transform: uppercase;letter-spacing: 1px;">
+                        <a href="profile.html" style="color: black; text-decoration:none;">View current orders</a>
+                    </div>
+                </div>
+            </div>
+            
+            <form onsubmit="listFunction()">
+            <!-- <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: center;"> -->
+                <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4" style="background-color: #f5f5f5;padding-bottom: 15px;">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="font-size: 15px; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; text-align: center; padding-top: 20px;">
+                        List a product item
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="name-post" type="text" style="margin-bottom: 0px;">
+                        <label class="grey-text" for="name-post" style="font-weight: 400; ">Name</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="price-post" type="number" style="margin-bottom: 0px;">
+                        <label class="grey-text" for="price-post" style="font-weight: 400;">Price</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="restaurant-post" type="text" style="margin-bottom: 0px;">
+                        <label class="grey-text" for="restaurant-post" style="font-weight: 400;">Restaurant</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="cuisine-post" type="text" style="margin-bottom: 0px;">
+                        <label class="grey-text" for="cuisine-post" style="font-weight: 400;">Cuisine</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="image-post" type="text" style="margin-bottom: 0px;">
+                        <label class="grey-text" for="image-post" style="font-weight: 400;">Image Link</label>
+                    </div>
+                    <div class="input-field col s12" style="text-align: center;">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">List Product
+                            <i class="material-icons left">perm_identity</i>
+                        </button>
+                    </div>
+
+                </div>
+            </form>   
+            <!-- </div> -->
+            
+        </div>
+    </div>
+    <hr>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; FeedMe 2016</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!--Angular-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/feedme.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+
+</body>
+
+</html>

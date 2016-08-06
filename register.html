@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Register - FeedMe: Value food from the Best Restaurants in Sydney</title>
+
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link href="css/feedme.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top" style="box-shadow: none;margin-top: -4px;">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="col-md-1 col-sm-1 navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <!--<img src="img/logo.png" style="width:50px;">-->
+                    <div style="width: 50px; height: 50px; background-image: url('img/logo.png') !important; background-size: 100% 100%;"></div>
+                </a>
+            </div>
+            <div class="col-md-9 col-sm-8" style="margin-left:0px;">
+                <p class="nav-title" style="padding-left: 11.7%;"><a href="index.html" style="text-decoration: none;">FeedMe</a></p>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="col-md-2 col-sm-2 collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <form name="loginForm">
+                        <li class="animated fadeIn" id="nav-username" style="line-height: 21.5px; padding-top: 0px; display:none;">
+                            <input ng-model=userName placeholder="Username" id="username" type="text" name="username" style="width: 80px;height: 20px;padding-top: 20px;margin-left: -40px;margin-right: 20px;font-weight:100; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;padding-left:0px;">
+                        </li>
+                        <li class="animated fadeIn" id="nav-password" style="line-height: 21.5px; padding-top: 0px; display:none;">
+                            <input placeholder="Password" id="password" type="password" name="password" style="width: 80px;height: 20px;padding-top: 20px;font-weight:100;font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                            <button onclick="login()" id="submit" class="btn btn-flat waves-effect waves-light" style="padding:0px;height:25px;width:27px; color: #fff;">
+                                    <i class="small material-icons left" style="font-size: 20px; padding-left: 5px;margin-top: -15px;">send</i>
+                            </button>
+                        </li>
+                    </form>
+                    <li style="margin-left: 80px;" id="nav-login">
+                        <a style="padding-left:0px;">Login</a>
+                    </li>
+                    <li class="animated fadeIn" id="nav-userlogged" style="display:none;">
+                        <a style="margin-left: -50px;padding-right: 15px;">G'day {{userName}}</a>
+                    </li>
+                    <li class="animated fadeIn" id="nav-logout" style="display:none;">
+                        <button onclick="logout()" id="submit" class="btn btn-flat waves-effect waves-light" style="padding:0px;height:25px;width:27px; margin-top: -10px;color: #fff;">
+                                    <i class="small material-icons left" style="font-size: 20px; padding-left: 3px;padding-right: 1px;margin-top: -15px;">power_settings_new</i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <header class="intro-header" style="background-image: url('img/home-cooking.jpg'); height: 110vh;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-3 col-md-10 col-md-offset-1" style="width:30vw; margin-left:28.4%;    background-color: rgba(255,255,255,0.3); padding-bottom: 20px;">
+                    <div class="register site-heading" style="padding-top: 100px; padding-bottom: 200px;">
+                        <span class="subheading" style="font-size:22px;">Sign up with your email address</span>
+                        <hr class="small">
+                        <div class="input-field col s12">
+                            <input id="username-reg" type="text">
+                            <label class="grey-text text-lighten-5" for="username-reg" style="font-weight: 400;">Username</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="password-reg" type="password">
+                            <label class="grey-text text-lighten-5" for="password-reg" style="font-weight: 400;">Password</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="firstname-reg" type="text">
+                            <label class="grey-text text-lighten-5" for="firstname-reg" style="font-weight: 400;">First Name</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="lastname-reg" type="text">
+                            <label class="grey-text text-lighten-5" for="lastname-reg" style="font-weight: 400;">Last Name</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="email" type="email">
+                            <label class="grey-text text-lighten-5" for="email" style="font-weight: 400;">Email</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="confirm-email" type="email">
+                            <label class="grey-text text-lighten-5" for="confirm-email" style="font-weight: 400;">Confirm Email</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                              <input onfocus="$(this).pickadate({selectYears: 50, max: true})" id="birthdate" type="text" class="datepicker">
+                              <label class="grey-text text-lighten-5" for="birthdate" style="font-weight: 400;">Date of Birth</label>
+                        </div> 
+
+                        <div class="input-field col s12">
+                            <input id="isowner-reg" type="text">
+                            <label class="grey-text text-lighten-5" for="isowner-reg" style="font-weight: 400; font-size: 12px;"><i>Owner Code (for Restaurant Owners)</i></label>
+                        </div>
+                        <div class="input-field col s12" style="margin:0;">
+                            <form action="#" style="text-align:left; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                                  <input name="group1" type="radio" id="test1" />
+                                  <label for="test1" style="font-weight: 400; color: #fff; ">Male</label>
+
+                                  <input name="group1" type="radio" id="test2" />
+                                  <label for="test2" style="font-weight: 400; color: #fff;">Female</label>
+                            </form>
+                        </div>
+                        <div class="input-field col s12">
+                            <button onclick="regSuccess()" class="btn waves-effect waves-light" type="submit" name="action">Sign up
+                                <i class="material-icons left">perm_identity</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="row">
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; FeedMe 2016</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/feedme.js"></script>
+    <script src="js/pickadate/lib/picker.js"></script>
+    <script src="js/pickadate/lib/picker.date.js"></script>
+    <script src="js/pickadate/lib/picker.time.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+</body>
+
+</html>
